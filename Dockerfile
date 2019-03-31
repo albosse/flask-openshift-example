@@ -9,6 +9,6 @@ COPY gunicorn_config.py /deploy/gunicorn_config.py
 COPY app /deploy/app
 WORKDIR /deploy/app
 
-EXPOSE 5000
+EXPOSE 8080
 
 CMD ["gunicorn", "--config", "/deploy/gunicorn_config.py", "main:app"]
