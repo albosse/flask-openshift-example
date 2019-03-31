@@ -11,4 +11,4 @@ WORKDIR /deploy/app
 
 EXPOSE 8080
 
-CMD ["gunicorn", "--config", "/deploy/gunicorn_config.py", "main:app"]
+CMD ["gunicorn", "--config", "/deploy/gunicorn_config.py", "wsgi:app"]
