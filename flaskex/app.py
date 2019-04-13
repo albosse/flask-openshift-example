@@ -33,15 +33,14 @@ def hello():
 
 
 @app.route('/customers')
-def get_customers():
-    customers = db.query_db('select * from customers')
-    return jsonify(customers)
-
-
 @app.route('/customers/<customer_id>')
-def get_customer(customer_id):
-    customer = db.query_db(f'select * from customers where CustomerId = {customer_id}')
-    return jsonify(customer)
+def get_customers(customer_id):
+
+    if not customer_id:
+        response = db.query_db('select * from customers')
+    else:
+        response = db.query_db(f'select * from customers where CustomerId = {customer_id}')
+    return jsonify(response)
 
 
 if __name__ == '__main__':
