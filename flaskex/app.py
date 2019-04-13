@@ -34,8 +34,7 @@ def hello():
 
 @app.route('/customers')
 @app.route('/customers/<customer_id>')
-def get_customers(customer_id):
-
+def get_customers(customer_id=None):
     if not customer_id:
         response = db.query_db('select * from customers')
     else:
