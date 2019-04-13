@@ -1,14 +1,14 @@
 FROM python:3.7-alpine
 
-RUN mkdir -p /deploy/app
-COPY app/requirements.txt /deploy/app/requirements.txt
-RUN pip install -r /deploy/app/requirements.txt
+RUN mkdir -p
+COPY requirements.txt requirements.txt
+RUN pip install -r requirements.txt
 
 # Deploy application
-COPY gunicorn_config.py /deploy/gunicorn_config.py
-COPY app /deploy/app
-WORKDIR /deploy/app
+COPY gunicorn_config.py /gunicorn_config.py
+COPY flaskex /
+WORKDIR /
 
 EXPOSE 8080
 
-CMD ["gunicorn", "--config", "/deploy/gunicorn_config.py", "wsgi:app"]
+CMD ["gunicorn", "--config", "/gunicorn_config.py", "wsgi:app"]
