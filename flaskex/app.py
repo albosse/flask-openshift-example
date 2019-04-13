@@ -32,6 +32,16 @@ def hello():
     return "Hello World"
 
 
+@app.route('/artists')
+@app.route('/artists/<artist_id>')
+def get_artists(artist_id=None):
+    if not artist_id:
+        response = db.query_db('select * from artists')
+    else:
+        response = db.query_db(f'select * from artists where ArtistId = {artist_id}')
+    return jsonify(response)
+
+
 @app.route('/customers')
 @app.route('/customers/<customer_id>')
 def get_customers(customer_id=None):
