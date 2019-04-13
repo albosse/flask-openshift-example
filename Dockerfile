@@ -1,11 +1,10 @@
 FROM python:3.7-alpine
 
-RUN mkdir -p
 COPY requirements.txt requirements.txt
 RUN pip install -r requirements.txt
 
 # Deploy application
-COPY gunicorn_config.py /gunicorn_config.py
+COPY gunicorn_config.py gunicorn_config.py
 COPY flaskex /
 WORKDIR /
 

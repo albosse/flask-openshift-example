@@ -3,6 +3,8 @@ import logging
 import socket
 from flask import Flask, jsonify
 
+from flaskex.db import db
+
 HOST_NAME = os.environ.get('OPENSHIFT_APP_DNS', 'localhost')
 APP_NAME = os.environ.get('OPENSHIFT_APP_NAME', 'flask')
 IP = os.environ.get('OPENSHIFT_PYTHON_IP', '127.0.0.1')
@@ -28,6 +30,18 @@ def index():
 @app.route('/test')
 def hello():
     return "Hello World"
+
+
+@app.route('/customers')
+def get_customers():
+    customers = db.query_db('select * from customers')
+    return jsonify(customers)
+
+
+@app.route('/customers/_id>')
+def get_customer(_id):
+    customer = db.query_db(f'select * from customers where CustomerId = {_id}')
+    return jsonify(customer)
 
 
 if __name__ == '__main__':
