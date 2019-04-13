@@ -38,9 +38,9 @@ def get_customers():
     return jsonify(customers)
 
 
-@app.route('/customers/_id>')
-def get_customer(_id):
-    customer = db.query_db(f'select * from customers where CustomerId = {_id}')
+@app.route('/customers/<customer_id>')
+def get_customer(customer_id):
+    customer = db.query_db(f'select * from customers where CustomerId = {customer_id}')
     return jsonify(customer)
 
 
