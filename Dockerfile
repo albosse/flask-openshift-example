@@ -5,7 +5,7 @@ RUN pip install --upgrade pip && \
     pip install -r requirements.txt
 
 # Deploy application
-COPY gunicorn_config.py gunicorn_config.py
+COPY gunicorn_config.py /flaskex/gunicorn_config.py
 COPY flaskex /flaskex
 WORKDIR /flaskex
 
