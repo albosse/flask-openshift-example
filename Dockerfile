@@ -4,13 +4,15 @@ COPY requirements.txt requirements.txt
 RUN pip install --upgrade pip && \
     pip install -r requirements.txt
 
-# Deploy application
-COPY gunicorn_config.py /gunicorn_config.py
-COPY flaskex /flaskex
-WORKDIR /flaskex
+RUN mkdir -p /deploy/flaskex
 
-ENV PYTHONPATH=/
+# Deploy application
+COPY gunicorn_config.py /deploy/gunicorn_config.py
+COPY flaskex /deploy/flaskex
+WORKDIR /deploy/flaskex
+
+ENV PYTHONPATH=/deploy
 
 EXPOSE 8080
 
-CMD ["gunicorn", "--config", "/gunicorn_config.py", "wsgi:app"]
+CMD ["gunicorn", "--config", "/deploy/gunicorn_config.py", "wsgi:app"]
