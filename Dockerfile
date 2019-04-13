@@ -9,6 +9,8 @@ COPY gunicorn_config.py /gunicorn_config.py
 COPY flaskex /flaskex
 WORKDIR /flaskex
 
+ENV PYTHONPATH=/
+
 EXPOSE 8080
 
 CMD ["gunicorn", "--config", "/gunicorn_config.py", "wsgi:app"]
