@@ -6,8 +6,8 @@ RUN pip install --upgrade pip && \
 
 # Deploy application
 COPY gunicorn_config.py gunicorn_config.py
-COPY flaskex /
-WORKDIR /
+COPY flaskex /flaskex
+WORKDIR /flaskex
 
 EXPOSE 8080
 
