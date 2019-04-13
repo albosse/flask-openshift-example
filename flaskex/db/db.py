@@ -1,7 +1,8 @@
 import sqlite3
+import pkg_resources
 from flask import g
 
-DATABASE = 'db/chinook.db'
+DATABASE = pkg_resources.resource_filename('flaskex.db', 'chinook.db')
 
 def get_db():
     db = getattr(g, '_database', None)

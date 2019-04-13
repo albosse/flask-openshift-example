@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 import os
 import logging
 import socket
@@ -27,28 +28,14 @@ def index():
     })
 
 
-@app.route('/test')
-def hello():
-    return "Hello World"
-
-
-@app.route('/artists/')
-@app.route('/artists/<artist_id>')
-def get_artists(artist_id=None):
-    if not artist_id:
-        response = db.query_db('select * from artists')
+@app.route('/<table>/')
+@app.route('/<table>/<_id>')
+def get_table(table=None, _id=None):
+    if not _id:
+        response = db.query_db(f'select * from {table}')
     else:
-        response = db.query_db(f'select * from artists where ArtistId = {artist_id}')
-    return jsonify(response)
-
-
-@app.route('/customers/')
-@app.route('/customers/<customer_id>')
-def get_customers(customer_id=None):
-    if not customer_id:
-        response = db.query_db('select * from customers')
-    else:
-        response = db.query_db(f'select * from customers where CustomerId = {customer_id}')
+        idcol = table[:-1] + "id"
+        response = db.query_db(f'select * from {table} where {idcol} = {_id}')
     return jsonify(response)
 
 
